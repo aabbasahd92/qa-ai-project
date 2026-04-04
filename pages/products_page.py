@@ -7,7 +7,7 @@ class ProductsPage:
         self.product_names = page.locator("[data-test='inventory-item-name']")
         self.product_prices = page.locator("[data-test='inventory-item-price']")
         self.product_items = page.locator("[data-test='inventory-item']")
-        self.cart_icon = page.locator("[data-test='shopping-cart-link']")
+        self.cart_icon = page.locator(".shopping_cart_link")
         self.cart_badge = page.locator("[data-test='shopping-cart-badge']")
 
     def goto(self):

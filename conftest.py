@@ -34,7 +34,7 @@ def login(page: Page):
 def logged_in(page: Page):
     login_page = LoginPage(page)
     login_page.goto()
-    login_page.login("standard_user", "secreHellot_sauce")
+    login_page.login("standard_user", "secret_sauce")
     return page
 
 @pytest.fixture
