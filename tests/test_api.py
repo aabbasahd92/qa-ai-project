@@ -63,3 +63,46 @@ def test_get_user(api: APIRequestContext):
 def test_post_not_found(api: APIRequestContext):
     response = api.get("/posts/99999")
     assert response.status == 404
+
+
+
+def test_create_post_missing_title(api: APIRequestContext):
+    response = api.post("/posts", data={
+        "body": "No title provided",
+        "userId": 1
+    })
+    assert response.status == 201
+    body = response.json()
+    assert "title" not in body, "API drops missing fields silently — known behavior"
+
+def test_create_post_invalid_user(api: APIRequestContext):
+    response = api.post("/posts", data={
+        "title": "Test",
+        "body": "Test body",
+        "userId": 99999
+    })
+    assert response.status == 201, "API accepts invalid userId — no validation"
+    body = response.json()
+    assert body["userId"] == 99999
+    assert response.status == 400, f"Expected 400 for invalid userId but got {response.status}"
+
+def test_update_nonexistent_post(api: APIRequestContext):
+    response = api.put("/posts/99999", data={
+        "title": "Ghost Post",
+        "body": "This post does not exist",
+        "userId": 1
+    })
+    assert response.status == 500, "API returns 500 instead of 404 — server crashes on missing resource"
+def test_get_comments_for_invalid_post(api: APIRequestContext):
+    response = api.get("/posts/99999/comments")
+    assert response.status == 200, "API returns 200 with empty list for invalid post"
+    body = response.json()
+    assert len(body) == 0, "No comments for non-existent post"
+
+def test_post_response_time(api: APIRequestContext):
+    import time
+    start = time.time()
+    response = api.get("/posts")
+    duration = time.time() - start
+    assert response.status == 200
+    assert duration < 3.0, f"Response too slow: {duration:.2f}s — expected under 3s"
