@@ -23,6 +23,7 @@ jobs:
           pip install pytest-playwright
           pip install pytest-html
           pip install allure-pytest
+          pip install pytest-xdist
 
       - name: Install browsers
         run: playwright install --with-deps
@@ -33,7 +34,7 @@ jobs:
           sleep 2
 
       - name: Run tests
-        run: pytest tests/ -v --browser chromium --alluredir=allure-results
+        run: pytest tests/ -q -n auto --browser chromium --alluredir=allure-results
 
       - name: Upload Allure results
         uses: actions/upload-artifact@v4
