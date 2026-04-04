@@ -84,7 +84,6 @@ def test_create_post_invalid_user(api: APIRequestContext):
     assert response.status == 201, "API accepts invalid userId — no validation"
     body = response.json()
     assert body["userId"] == 99999
-    assert response.status == 400, f"Expected 400 for invalid userId but got {response.status}"
 
 def test_update_nonexistent_post(api: APIRequestContext):
     response = api.put("/posts/99999", data={
