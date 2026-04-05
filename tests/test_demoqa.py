@@ -40,12 +40,12 @@ def test_prompt_alert(page: Page):
     page.locator("#promtButton").click()
     result = page.locator("#promptResult")
     expect(result).to_have_text("You entered Ahmed")
-    
+
 def test_drag_and_drop(page: Page):
     page.set_viewport_size({"width": 1280, "height": 720})
     demoqa = DemoQAPage(page)
     demoqa.goto_droppable()
-    page.wait_for_load_state("networkidle")
+    page.wait_for_load_state("domcontentloaded")
     source = page.locator("#draggable")
     target = page.locator("#droppable").first
     source.scroll_into_view_if_needed()
