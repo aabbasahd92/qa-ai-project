@@ -14,7 +14,7 @@ class DemoQAPage:
         self.page.goto("https://demoqa.com/slider")
 
     def goto_progress_bar(self):
-        self.page.goto("https://demoqa.com/progress-bar")
+        self.page.goto("https://demoqa.com/progress-bar", timeout=60000)
 
     def goto_datepicker(self):
         self.page.goto("https://demoqa.com/date-picker")
