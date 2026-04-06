@@ -10,6 +10,18 @@ A production-grade QA automation framework built with **Playwright + Python**, c
 
 ---
 
+## Test Execution
+
+![Test Execution Demo](assets/demo.gif)
+
+---
+
+## Allure Report
+
+![Allure Report](assets/allure-report.png)
+
+---
+
 ## Tech Stack
 
 | Tool | Purpose |
@@ -144,6 +156,10 @@ page.route("**/api/**", lambda route: route.fulfill(status=500))
 ---
 
 ## CI/CD Pipeline
+
+![CI Passing](assets/ci-passing-1.png)
+![CI Jobs](assets/ci-passing-2.png)
+![CI Details](assets/ci-passing-3.png)
 
 Every push to `main` triggers:
 1. Ubuntu server provisioned
